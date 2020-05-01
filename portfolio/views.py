@@ -96,21 +96,18 @@ def index(request):
 			#for graphs start to end
 		else:
 			DataFrame = yf.download(request.POST['s'],request.POST['sdate'],request.POST['edate'])
-			DataFrame1 = yf.download("AAPL",request.POST['sdate'],request.POST['edate'])
-			DataFrame2 = yf.download("TSLA",request.POST['sdate'],request.POST['edate'])
 			close=DataFrame['Close'].tolist()
-			close1=DataFrame1['Close'].tolist()
-			close2=DataFrame2['Close'].tolist()
-			s=str(request.POST['s'])
-			no=[]
-			no1=[]
-			no2=[]
-			for i in range(len(close)):
-				no.append(i+1)
-			for i in range(len(close1)):
-				no1.append(i+1)
-			for i in range(len(close2)):
-				no2.append(i+1)
+			import datetime
+			s=request.POST['s']
+			sdate=datetime.datetime.strptime(request.POST['sdate'], "%Y-%m-%d").date()
+			edate=datetime.datetime.strptime(request.POST['edate'], "%Y-%m-%d").date()
+			delta = edate - sdate
+			for i in range(delta.days + 1):
+			    day = sdate + timedelta(days=i)
+			    no.append(str(day))
+			diff=len(no)-len(close)
+			for i in range(1,diff+1):
+			    no.remove(no[i])
 		 
 	d=dict()
 	#for pie chart getting all investemnts summing up the stock by their labels
