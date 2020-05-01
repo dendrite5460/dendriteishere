@@ -52,6 +52,7 @@ def index(request):
 	s=""
 	labels = []
 	datap = []
+	n="Stock"
 	DataFrame3="Table for Particular Stock"
 	#fetch recent 10 investments
 	query_results= investments.objects.all().order_by('-id')[:10]
@@ -125,7 +126,7 @@ def index(request):
 	labels=list(d.keys())
 	datap=list(d.values())
 	#returning all the calculates values to html
-	return render(request, 'portfolio/index.html',{'labels':labels,'datap':datap,'price':price,'amount':amount,'query_results':query_results,'rem':rem,'close':close,'no':no,'s':s,'close1':close1,'close2':close2,'no1':no1,'no2':no2,'DataFrame3':DataFrame3})
+	return render(request, 'portfolio/index.html',{'n':n,'labels':labels,'datap':datap,'price':price,'amount':amount,'query_results':query_results,'rem':rem,'close':close,'no':no,'s':s,'close1':close1,'close2':close2,'no1':no1,'no2':no2,'DataFrame3':DataFrame3})
 
 #work end
 # not needed now--------------------------------------------------------------------------
@@ -390,3 +391,4 @@ def bonds(request):
 	datap=list(d.values())
 	#returning all the calculates values to html
 	return render(request, 'portfolio/bonds.html',{'n':n,'labels':labels,'datap':datap,'price':price,'amount':amount,'query_results':query_results,'rem':rem,'close':close,'no':no,'s':s,'close1':close1,'close2':close2,'no1':no1,'no2':no2,'DataFrame3':DataFrame3})	
+
